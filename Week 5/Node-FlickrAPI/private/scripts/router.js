@@ -5,15 +5,22 @@ var router = function () {
     var path = require('path'),
         fs = require('fs'),
         url =  require('url'),
+        apiData = require('./getAPIData.js')
         routeAllTheThings = function (fullUrl, callback) {
-            console.log('fullurl: ' + fullUrl);
             var parsedUrl = url.parse(fullUrl);
-
-            if(parsedUrl.href === '/apiData') {
+            if(parsedUrl.pathname === '/apiData') {
                 //dostuff
+                var term = parsedUrl.query.split('=')[1];
+                console.log('term ' + term);
+                apiData.callAPI(term, function(data) {
+                    callback(null ,data, true);
+                });
             } else {
                 // file should be one of the types specified in server extensions
-                readFile(parsedUrl.href, function (err, data) {
+                if(parsedUrl.pathname === '/') {
+                    parsedUrl.pathname = '/index.html';
+                }
+                readFile(parsedUrl.pathname, function (err, data) {
                     if (callback && typeof(callback) === "function") {
                         callback(err, data);
                     }
@@ -25,11 +32,11 @@ var router = function () {
         localMaps = {
             '.html': '/public/',
             '.css': '/public/css/',
+            '.map': '/public/css',
             '.js': '/public/scripts/',
             '.ico': '/public/assets/images/'
         },
         readFile = function (filename, callback) {
-            console.log('filename: ' + filename);
             var ext = path.extname(filename),
                 localPath = process.cwd() + localMaps[ext] + filename;
 
@@ -37,10 +44,8 @@ var router = function () {
                 if (exists) {
                     fs.readFile(localPath, function (err, contents) {
                         if (err) {
-                            console.log(err);
                             return err;
                         } else {
-                            console.log('data OK: ' + contents);
                             if (callback && typeof(callback) === "function") {
                                 callback(err, contents);
                             }

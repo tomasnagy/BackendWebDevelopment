@@ -8,9 +8,19 @@ var staticServer = function () {
         httpListen = function (httpPort) {
             var server = http.createServer(function (req, res) {
 
-                router.init(req.url, function (err, data) {
-                    if(!err)
-                        readFile(data, path.extname(req.url), res);
+                router.init(req.url, function (err, data, isData) {
+
+                    if(!err) {
+                        //check if data is jsonarray
+                        if(isData) {
+                            // return apidata
+                            sendJson(data, res);
+                        } else {
+                            // data is always text
+                            readFile(data, path.extname(req.url), res);
+                        }
+
+                    }
                 });
 
             }).listen(httpPort, 'localhost');
@@ -30,6 +40,10 @@ var staticServer = function () {
                 res.end(data);
             }
         },
+        sendJson = function(data, res) {
+            res.writeHead(200, {'Content-type': 'application/json'})
+            res.end(JSON.stringify(data));
+        }
         init = function (httpPort) {
             httpListen(httpPort);
         };
