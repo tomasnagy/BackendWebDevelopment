@@ -1,0 +1,6 @@
+form > fieldset {
+  border: none; }
+  form > fieldset * {
+    display: block; }
+
+/*# sourceMappingURL=style.css.map */
