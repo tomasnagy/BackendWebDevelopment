@@ -13,7 +13,9 @@ apiDomain.on('error', function(err) {
 apiDomain.run(function() {
 
     var getAPIData = function() {
-            http = require('http'),
+            var http = require('http'),
+            EventEmitter = require('events').EventEmitter,
+            emitter = new EventEmitter(),
             options = {
             method: 'GET',
             port: 80,
@@ -38,6 +40,7 @@ apiDomain.run(function() {
 
                     response.on('end', function () {
                         this.emit('apiData', 'hoerraa');
+                        emitter.emit('data', json);
                         callback(JSON.parse(clean(json)));
                     });
                 }).end();
@@ -45,7 +48,8 @@ apiDomain.run(function() {
 
         return {
             callAPI: callAPI,
-            options: options
+            options: options,
+            events: emitter
         };
     }();
 

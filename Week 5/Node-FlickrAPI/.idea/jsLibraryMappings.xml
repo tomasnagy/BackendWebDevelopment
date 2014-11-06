@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$" libraries="{Node-FlickrAPI node_modules}" />
     <file url="file://$PROJECT_DIR$/private/scripts/getAPIData.js" libraries="{Node.js Globals, Node.js v0.10.32 Core Modules}" />
+    <file url="file://$PROJECT_DIR$/private/scripts/router.js" libraries="{Node.js Globals, Node.js v0.10.32 Core Modules}" />
     <file url="file://$PROJECT_DIR$/private/scripts/staticServer.js" libraries="{Node.js Globals}" />
   </component>
 </project>
