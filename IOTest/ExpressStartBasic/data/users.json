@@ -1,0 +1,13 @@
+﻿{
+  "johan": {
+    "username": "johan",
+    "name": "vann",
+    "profession": "docent"
+  },
+
+  "steven": {
+    "username": "steven",
+    "name": "verb",
+    "profession": "docent"
+  }
+}

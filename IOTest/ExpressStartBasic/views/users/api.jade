@@ -1,0 +1,27 @@
+﻿//api.jade voor users
+extends ../layout
+
+block content
+    h1= title
+    
+    h2 Gebruikers overzicht
+    #userList
+        table
+            thead
+                th gebruikersnaam
+                th beroep
+                th email
+                th 
+                th
+            tbody
+
+
+    #userDetail
+        h2 Gebruikers detail
+        p
+            fieldset
+                <div><input type="hidden" id="userName" name="userName">
+                <div><span>naam : </span><span id ="name" name="name"></span></div>
+                <div><label for="userEmail">email : </span><input type="text" id ="userEmail" name="userEmail" /></div>
+                <div><label for="userProfession">beroep : </span><input type="text" id ="userProfession" name="userProfession"></div>
+                button#btnUpdateUser Update User
